@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stopwatch (No JS)</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            padding-top: 100px;
+        }
+        h1 {
+            font-size: 48px;
+        }
+        form {
+            display: inline-block;
+            margin: 5px;
+        }
+        input[type=submit] {
+            font-size: 20px;
+            padding: 10px 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>
+        {% if elapsed is not none %}
+            {% set hours = (elapsed // 3600)|int %}
+            {% set minutes = ((elapsed % 3600) // 60)|int %}
+            {% set seconds = (elapsed % 60)|int %}
+            {{ '%02d:%02d:%02d' % (hours, minutes, seconds) }}
+        {% else %}
+            00:00:00
+        {% endif %}
+    </h1>
+
+    <form action="/start" method="post">
+        <input type="submit" value="Start">
+    </form>
+    <form action="/stop" method="post">
+        <input type="submit" value="Stop">
+    </form>
+    <form action="/reset" method="post">
+        <input type="submit" value="Reset">
+    </form>
+</body>
+</html>
